@@ -11,7 +11,7 @@ It allows you to:
 
 ## 🚀 Getting Started (Development)
 
-* 1. Clone the repository
+* Clone the repository
 ```
 git clone https://github.com/artgolwebdev/lilurl.git
 cd lilurl
