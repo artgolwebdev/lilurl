@@ -50,7 +50,8 @@ export const createShortUrl = async (req, res) => {
 
     try {
         await newUrl.save();
-        return res.status(200).json({ shortId, originalUrl });
+        const cont = req.app.locals.cont;
+        return res.status(200).json({ shortId, originalUrl , shortUrl: `${cont.BASE_URL}/${shortId}` });
     } catch (error) {
         console.error('Error saving to DB:', error);
         return res.status(500).json({ error: 'Internal Server Error' });

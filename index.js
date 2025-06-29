@@ -10,6 +10,9 @@ import urlRoutes from './routes/urlRoutes.js';
 
 dotenv.config();
 const app = express();
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+const cont = { BASE_URL: BASE_URL }; // Your custom object
+app.locals.cont = cont;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
