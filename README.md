@@ -11,9 +11,11 @@ It allows you to:
 
 ## 🚀 Getting Started (Development)
 
-### 1. Clone the repository
+* 1. Clone the repository
+```
 git clone https://github.com/artgolwebdev/lilurl.git
 cd lilurl
+```
 
 ### 2.  Install dependencies
 npm install
