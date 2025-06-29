@@ -17,18 +17,22 @@ git clone https://github.com/artgolwebdev/lilurl.git
 cd lilurl
 ```
 
-### 2.  Install dependencies
+* Install dependencies
+```
 npm install
+```
 
-### 3.  Set up environment variables
-.env
+* Set up environment variables .env
+```
 PORT=5000
 MONGO_URI=your_mongodb_atlas_connection_string
 BASE_URL=http://localhost:5000
+```
 
-### 4.  Start the server
+* Start the server
+```
 npm start
-
+```
 The server will run on http://localhost:5000
 
 ## 📡 API Endpoints
