@@ -1,4 +1,6 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -8,6 +10,8 @@ import urlRoutes from './routes/urlRoutes.js';
 
 dotenv.config();
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const limiter = reateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -16,10 +20,15 @@ const limiter = reateLimit({
 });
 
 app.use(limiter);
+app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(cors()); // add restrictions if needed
 app.use(xss()); // sanitize user input
 app.use(express.json());
 app.use('/', urlRoutes);
+// React fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 
