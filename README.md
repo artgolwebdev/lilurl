@@ -41,33 +41,38 @@ The server will run on http://localhost:5000
 
 POST /shorten
 
-json
+```
 {
   "originalUrl": "https://example.com"
 }
+```
 
 ### Redirect to Original URL    
 
 POST /:shortId
 
-json
+```
 {
   "originalUrl": "https://example.com"
 }
+```
 
 Response 
+```
 {
   "shortId": "abc123",
   "originalUrl": "https://example.com"
 }
+```
 
 
 ###  Get Total Shortened URLs   
 
 GET  /total
 
-json
+```
 {
   "totalUrls": 42
 }
+```
 
