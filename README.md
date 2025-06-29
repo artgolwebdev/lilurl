@@ -49,21 +49,7 @@ POST /shorten
 
 ### Redirect to Original URL    
 
-POST /:shortId
-
-```
-{
-  "originalUrl": "https://example.com"
-}
-```
-
-Response 
-```
-{
-  "shortId": "abc123",
-  "originalUrl": "https://example.com"
-}
-```
+GET /:shortId
 
 
 ###  Get Total Shortened URLs   
