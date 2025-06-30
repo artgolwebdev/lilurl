@@ -1,0 +1,141 @@
+
+// Cyberpunk color palette
+$cyber-primary: #00fff7;
+$cyber-secondary: #ff00ea;
+$cyber-success: #39ff14;
+$cyber-danger: #ff3131;
+$cyber-warning: #ffe600;
+$cyber-info: #00b3ff;
+$cyber-dark-bg: #18122b;
+$cyber-light-bg: #f4faff;
+$cyber-dark-text: #e0e0e0;
+$cyber-light-text: #18122b;
+
+// Light theme overrides
+[data-bs-theme='light'] {
+  --bs-body-bg: #{$cyber-light-bg};
+  --bs-body-color: #{$cyber-light-text};
+  --bs-primary: #{$cyber-primary};
+  --bs-secondary: #{$cyber-secondary};
+  --bs-success: #{$cyber-success};
+  --bs-danger: #{$cyber-danger};
+  --bs-warning: #{$cyber-warning};
+  --bs-info: #{$cyber-info};
+  --bs-navbar-bg:#b05cf5;
+}
+
+// Dark theme overrides
+[data-bs-theme='dark'] {
+  --bs-body-bg: #{$cyber-dark-bg};
+  --bs-body-color: #{$cyber-dark-text};
+  --bs-primary: #{$cyber-primary};
+  --bs-secondary: #{$cyber-secondary};
+  --bs-success: #{$cyber-success};
+  --bs-danger: #{$cyber-danger};
+  --bs-warning: #{$cyber-warning};
+  --bs-info: #{$cyber-info};
+  --bs-navbar-bg: #330033;
+}
+
+// Import Bootstrap’s SCSS after variable overrides
+@import 'bootstrap/scss/bootstrap';
+
+// Cyberpunk background
+.texture-bg , body{
+  font-family: 'Inter', sans-serif;
+  /*background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%2300fff7' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23ff00ea'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");*/
+  background-color: var( --bs-navbar-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23404' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23505'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+h1, h2, h3,p,button {
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+footer{
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#vanta{
+     width:100%;
+     height:60vh;
+     position: absolute;
+     top: 0;
+     left: 0;
+     z-index: -1;
+}
+
+button[type="submit"] {
+  position: relative;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #00fff7 0%, #ff00ea 100%);
+  color: #18122b;
+  border: none;
+  box-shadow: 0 0 8px #00fff7, 0 0 2px #ff00ea inset;
+  font-weight: bold;
+  letter-spacing: 2px;
+  overflow: hidden;
+  z-index: 1;
+  transition: background 0.5s, color 0.3s, letter-spacing 0.3s, box-shadow 0.3s;
+}
+
+button[type="submit"]:hover, button[type="submit"]:focus {
+  background: linear-gradient(90deg, #ff00ea 0%, #00fff7 100%);
+  color: #fff;
+  box-shadow: 0 0 24px #ff00ea, 0 0 8px #00fff7 inset;
+}
+button[type="submit"]:hover:before, button[type="submit"]:focus:before {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0.7;
+}
+
+
+// mobile styles
+@media screen and (max-width: 768px) {
+  .texture-bg {
+    background-size: cover;
+    background-position: center;
+  }
+  
+  #vanta {
+    height: 80vh; // Adjust height for mobile
+  }
+  
+  .container {
+    padding: 15px; // Reduce padding for smaller screens
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem; // Adjust navbar brand size
+  }
+
+}
+
+@media screen and (max-width: 376px) {
+   button[type="submit"] {
+    font-size: 1rem;
+  }
+}
+
+// Custom cyber alert style
+.alert-danger {
+  background: linear-gradient(90deg, #ff3131 0%, #ff00ea 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 8px #ff3131, 0 0 2px #ff00ea inset;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.alert-success {
+  background: linear-gradient(90deg, #39ff14 0%, #00fff7 100%);
+  color: #18122b;
+  border: none;
+  box-shadow: 0 0 8px #39ff14, 0 0 2px #00fff7 inset;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
