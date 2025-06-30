@@ -29,8 +29,10 @@ function LilUrlForm() {
     setError('');
     setShortUrl('');
     setCopied(false);
+    const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
+    console.log("BASE_URL : " + BASE_URL);
     try {
-      const res = await fetch('http://localhost:5000/shorten', {
+      const res = await fetch(`${BASE_URL}/shorten`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ originalUrl: input })
@@ -47,16 +49,9 @@ function LilUrlForm() {
         setError(data.message || 'Failed to shorten URL');
       }
     } catch (err) {
-      console.error('Error:', err);
       setError('Server error. Try again later.');
     }
     setLoading(false);
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(shortUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
   };
 
   return (
