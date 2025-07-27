@@ -15,16 +15,18 @@ function App() {
           <LilUrlForm />
         </div>  
       </div>
-      
-      <div className="row justify-content-center mt-4">
-        <img
-          src={LilurlBabyLogo}
-          alt="LilURL Baby Logo"
-          style={{ width: '140px' }}
-        />
-      </div>
+
 
       <footer className="text-center mt-4 mb-4">
+
+          <div className="mt-4">
+          <img
+            src={LilurlBabyLogo}
+            alt="LilURL Baby Logo"
+            style={{ width: '140px' }}
+          />
+        </div>
+
         <small>lilurl.baby</small>
       </footer>
       </div>

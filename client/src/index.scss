@@ -64,6 +64,9 @@ $cyber-light-text: #18122b;
 
 // Import Bootstrap’s SCSS after variable overrides
 @import 'bootstrap/scss/bootstrap';
+html{
+  overflow-x: hidden;
+}
 
 // Cyberpunk background
 .texture-bg , body{
@@ -80,7 +83,7 @@ h1, h2, h3,p {
   font-family: "Space Mono", monospace;
 }
 
-h2{
+h2 , h3{
   color:#ff00ea;
  text-shadow: 0 0 8px #00fff7, 0 0 2px #ff00ea inset;
 }
@@ -91,6 +94,7 @@ button{
   font-weight: 400;
   font-style: normal;
 }
+
 
 footer{
   position: relative;

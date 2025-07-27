@@ -57,7 +57,37 @@ function LilUrlForm() {
 
   return (
     <div className="glass3d lilurl-card">
-        <h2 className='bungee-regular text-center'>Shorten URL</h2>
+
+           {/* Show results from localStorage */}
+        {results.length > 0 && (
+          <div className="mt-4 mb-4">
+            <h3 className='bungee-regular'>Your Links</h3>
+              {results.map((r, idx) => (
+                <Card key={idx} className='mb-2'>
+                  <CardHeader>{r.originalUrl}</CardHeader>
+                  <Card.Body>
+                    { /* <Card.Title style={{ fontSize: '1rem', wordBreak: 'break-all' }}>{r.originalUrl}</Card.Title> */ }
+                    <Card.Text>
+                      <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
+                    </Card.Text>
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      onClick={() => {
+                        navigator.clipboard.writeText(r.shortUrl);
+                        setToastMsg('Short URL copied!');
+                        setShowToast(true);
+                      }}
+                    >
+                      Copy
+                    </Button>
+                  </Card.Body>
+                </Card>
+              ))}
+          </div>
+        )}
+
+        <h2 className='bungee-regular'>Shorten URL</h2>
       <Card>
       <Card.Body>
         <Card.Text>
@@ -86,35 +116,7 @@ function LilUrlForm() {
         </Form>
         {error && <div className="alert alert-danger mt-2">{error}</div>}
 
-        {/* Show results from localStorage */}
-        {results.length > 0 && (
-          <div className="mt-4">
-            <h5>Your Links</h5>
-            <div className="d-flex flex-wrap gap-3 ">
-              {results.map((r, idx) => (
-                <Card key={idx} style={{ minWidth: 250, maxWidth: 350 }}>
-                  <Card.Body>
-                    <Card.Title style={{ fontSize: '1rem', wordBreak: 'break-all' }}>{r.originalUrl}</Card.Title>
-                    <Card.Text>
-                      <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
-                    </Card.Text>
-                    <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={() => {
-                        navigator.clipboard.writeText(r.shortUrl);
-                        setToastMsg('Short URL copied!');
-                        setShowToast(true);
-                      }}
-                    >
-                      Copy
-                    </Button>
-                  </Card.Body>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )}
+   
         {/* Toast notification for copy */}
         <div style={{ position: 'fixed', top: 20, right: 20, zIndex: 9999 }}>
           <Toast onClose={() => setShowToast(false)} show={showToast} delay={1200} autohide bg="success">
