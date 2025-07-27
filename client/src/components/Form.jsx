@@ -55,10 +55,10 @@ function LilUrlForm() {
   };
 
   return (
-    <Card>
+    <div className="glass3d lilurl-card">
       <Card.Body>
         <Card.Text>
-          Paste your long link.
+          <h2>Paste your long link.</h2>
         </Card.Text>
         <Form onSubmit={handleSubmit}>
           <FloatingLabel
@@ -77,8 +77,8 @@ function LilUrlForm() {
             />
           </FloatingLabel>
           <div className="d-grid gap-2 mb-2">
-            <Button variant="primary" size="lg" type="submit" disabled={loading}>
-              {loading ? 'Loading...' : 'Shorten URL'}
+            <Button className='audiowide-regular' variant="primary" size="lg" type="submit" disabled={loading}>
+              {loading ? 'Loading...' : 'Shorten'}
             </Button>
           </div>
         </Form>
@@ -88,7 +88,7 @@ function LilUrlForm() {
         {results.length > 0 && (
           <div className="mt-4">
             <h5>Your Links</h5>
-            <div className="d-flex flex-wrap gap-3">
+            <div className="d-flex flex-wrap gap-3 ">
               {results.map((r, idx) => (
                 <Card key={idx} style={{ minWidth: 250, maxWidth: 350 }}>
                   <Card.Body>
@@ -120,7 +120,7 @@ function LilUrlForm() {
           </Toast>
         </div>
       </Card.Body>
-    </Card>
+    </div>
   );
 }
 
