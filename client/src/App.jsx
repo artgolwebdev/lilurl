@@ -1,6 +1,6 @@
 //import './App.scss'
 import VantaBackground from './components/VantaBackground.jsx';
-import MyNavBar from './components/MyNavBar.jsx';
+import LilUrlNavBar from './components/LilUrlNavBar.jsx';
 import LilUrlForm from './components/Form.jsx';
 import LilurlBabyLogo from './assets/lilurlbaby.png';
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <>  
       <VantaBackground />
-      <MyNavBar />
+      <LilUrlNavBar />
       <div className="container ">
       <div className="row justify-content-center mt-4">
         <div className="col-md-6">

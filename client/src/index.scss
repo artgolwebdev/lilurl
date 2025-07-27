@@ -139,3 +139,50 @@ button[type="submit"]:hover:before, button[type="submit"]:focus:before {
   font-weight: bold;
   letter-spacing: 1px;
 }
+
+
+// Custom switch theme 
+.lilUrlSwitch{
+  position:relative;
+   -webkit-user-select: none; /* Safari */
+  -ms-user-select: none;    /* IE 10 and IE 11 */
+  user-select: none;  
+
+    .form-check {
+
+      input.form-check-input {
+        width: 52px;
+        height: 32px;
+        background-color:transparent;
+        border: none;
+        outline: none;
+
+        &:focus{
+          box-shadow: none;
+        }
+
+         &.dark{
+          box-shadow: none;
+          background-size: 4px;
+        }
+      }
+
+      label.form-check-label {  
+        position:absolute;
+        top: 4px;
+        transition: all 1.3s ease-in-out;
+        font-size:22px;
+        border:none;
+        outline: none;
+      }
+      
+      label.form-check-label.light {
+          right: 3px;
+      }
+
+      label.form-check-label.dark{
+          left: 3px; 
+      }
+    }
+
+}

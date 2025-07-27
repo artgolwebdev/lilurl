@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import LilurlBabyLogo from '../assets/lilurlbaby.png';
 
-function MyNavBar() {
+function LilUrlNavBar() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
@@ -28,18 +28,26 @@ function MyNavBar() {
           />
           
         </Navbar.Brand>
-        <Button
-          variant={theme === 'light' ? 'outline-dark' : 'outline-light'}
-          onClick={toggleTheme}
-          className="ms-auto rounded-circle d-flex align-items-center justify-content-center"
-          style={{ width: 40, height: 40, fontSize: 22, padding: 0 }}
-          aria-label="Toggle theme"
-        >
-          {theme === 'light' ? '🌙' : '☀️'}
-        </Button>
+
+      
+
+
+        <div className="lilUrlSwitch">
+          <div className="form-check form-switch">
+          <input 
+            className={"form-check-input " + theme } 
+            type="checkbox" 
+            role="switch" 
+            id="flexSwitchCheckDefault"
+            onClick={toggleTheme} />
+          <label 
+            className={"form-check-label " + theme } 
+            htmlFor="flexSwitchCheckDefault">{theme === 'light' ? '☀️' : '🌙'}</label>
+        </div>
+        </div>
       </Container>
     </Navbar>
   );
 }
 
-export default MyNavBar;
+export default LilUrlNavBar;
