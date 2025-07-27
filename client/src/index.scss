@@ -1,4 +1,16 @@
 
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Neonderthaw&display=swap');
+.bungee-regular {
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.neonderthaw-regular {
+  font-family: "Neonderthaw", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 // Cyberpunk color palette
 $cyber-primary: #00fff7;
 $cyber-secondary: #ff00ea;
@@ -156,6 +168,8 @@ button[type="submit"]:hover:before, button[type="submit"]:focus:before {
         background-color:transparent;
         border: none;
         outline: none;
+        z-index: 2;
+        position: relative;
 
         &:focus{
           box-shadow: none;

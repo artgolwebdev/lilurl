@@ -29,6 +29,8 @@ function LilUrlNavBar() {
           
         </Navbar.Brand>
 
+
+      <h1 className='bungee-regular'>lilurl<span className='neonderthaw-regular'>.baby</span></h1>
       
 
 
