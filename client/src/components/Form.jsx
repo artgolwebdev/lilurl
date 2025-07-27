@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 function LilUrlForm() {
   const [input, setInput] = useState('');
@@ -56,29 +57,30 @@ function LilUrlForm() {
 
   return (
     <div className="glass3d lilurl-card">
+        <h2 className='bungee-regular text-center'>Shorten URL</h2>
+      <Card>
       <Card.Body>
         <Card.Text>
-          <h2>Paste your long link.</h2>
+          <p>Paste long link</p>
         </Card.Text>
         <Form onSubmit={handleSubmit}>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Original URL"
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="Enter link here"
+         
+
+        <div className="mb-3">
+               <input   type="text"
+              placeholder="https://example.com/your-long-url"
+              className="form-control"
               value={input}
               onChange={e => setInput(e.target.value)}
               disabled={loading}
               autoComplete='off'
-              required
-            />
-          </FloatingLabel>
+              required/>
+        </div>
+
+      
           <div className="d-grid gap-2 mb-2">
             <Button className='audiowide-regular' variant="primary" size="lg" type="submit" disabled={loading}>
-              {loading ? 'Loading...' : 'Shorten'}
+              {loading ? 'Loading...' : 'get link for free'}
             </Button>
           </div>
         </Form>
@@ -120,6 +122,7 @@ function LilUrlForm() {
           </Toast>
         </div>
       </Card.Body>
+      </Card>
     </div>
   );
 }
