@@ -20,15 +20,15 @@ function LilUrlForm() {
     const fetchUrls = async () => {
       const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
       console.log("BASE_URL : " + BASE_URL);
-      try {
-        const res = await fetch(`${BASE_URL}/my-urls`);
-        const data = await res.json();
-        if (res.ok) {
-          setResults(data);
-        }
-      } catch (err) {
-        console.error('Error fetching URLs:', err);
+      // to do with base url load total links count 
+
+      const saved = localStorage.getItem('lilurl_results');
+      if (saved) {
+        console.log("Saved results found in localStorage");
+        console.log("Saved results: ", saved);
+        setResults(JSON.parse(saved));
       }
+  
     };
     fetchUrls();
   }, []);
@@ -39,25 +39,14 @@ function LilUrlForm() {
     setError('');
     setShortUrl('');
     setCopied(false);
-    const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
-    console.log("BASE_URL : " + BASE_URL);
-    try {
-      const res = await fetch(`${BASE_URL}/shorten`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ originalUrl: input })
-      });
-      const data = await res.json();
-      if (res.ok && data.shortUrl) {
-        setShortUrl(data.shortUrl);
-        const newResult = { originalUrl: input, shortUrl: data.shortUrl, shortId: data.shortId };
-        setResults([newResult, ...results]);
-      } else {
-        setError(data.message || 'Failed to shorten URL');
-      }
-    } catch (err) {
-      setError('Server error. Try again later.');
-    }
+
+    // Save to localStorage
+    const newResult = { originalUrl: input, shortUrl: data.shortUrl };
+    const updatedResults = [newResult, ...results];
+    setResults(updatedResults);
+    localStorage.setItem('lilurl_results', JSON.stringify(updatedResults));
+
+
     setLoading(false);
   };
 
