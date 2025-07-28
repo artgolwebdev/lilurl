@@ -97,7 +97,6 @@ export const redirectToOriginalUrl = async (req, res) => {
 };
 
 export const getTotalUrls = async (req, res) => {
-    console.log("sdfsdfsdfsdf ..... ");
     try {
         const totalUrls = await Url.countDocuments();
         res.status(200).json({ totalUrls });

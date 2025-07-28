@@ -3,8 +3,6 @@ import { createShortUrl, createQRCode , redirectToOriginalUrl, getTotalUrls } fr
 
 const router = express.Router();
 
-console.log("test");
-
 router.get('/api/totalLinks', getTotalUrls)
 router.post('/api/shorten', createShortUrl);
 router.post('/api/qr', createQRCode)
