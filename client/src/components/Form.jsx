@@ -21,7 +21,6 @@ function LilUrlForm() {
       const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
       console.log("BASE_URL : " + BASE_URL);
       // to do with base url load total links count 
-
       const saved = localStorage.getItem('lilurl_results');
       if (saved) {
         console.log("Saved results found in localStorage");
@@ -62,13 +61,13 @@ function LilUrlForm() {
                   <CardHeader>{r.originalUrl}</CardHeader>
                   <Card.Body>
                     <Card.Text>
-                      <a href={`${window.location.origin}/${r.shortId}`} target="_blank" rel="noopener noreferrer">{`${window.location.origin}/${r.shortId}`}</a>
+                      <a href={`${window.location.origin}/${r.shortId}`} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
                     </Card.Text>
                     <Button
                       variant="outline-secondary"
                       size="sm"
                       onClick={() => {
-                        navigator.clipboard.writeText(`${window.location.origin}/${r.shortId}`);
+                        navigator.clipboard.writeText(navigator.clipboard.writeText(r.shortUrl));
                         setToastMsg('Short URL copied!');
                         setShowToast(true);
                       }}
