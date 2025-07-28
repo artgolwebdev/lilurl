@@ -75,6 +75,8 @@ export const createShortUrl = async (req, res) => {
 
 export const redirectToOriginalUrl = async (req, res) => {
     const { shortId } = req.params;
+
+    console.log(shortId);
     
     try {
         const url = await Url.findOne({ shortId });

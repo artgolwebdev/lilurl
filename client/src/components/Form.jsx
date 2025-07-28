@@ -19,6 +19,7 @@ function LilUrlForm() {
   useEffect(() => {
     const fetchUrls = async () => {
       const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
+      console.log("BASE_URL : " + BASE_URL);
       try {
         const res = await fetch(`${BASE_URL}/my-urls`);
         const data = await res.json();
@@ -71,7 +72,6 @@ function LilUrlForm() {
                 <Card key={r.shortId} className='mb-2'>
                   <CardHeader>{r.originalUrl}</CardHeader>
                   <Card.Body>
-                    { /* <Card.Title style={{ fontSize: '1rem', wordBreak: 'break-all' }}>{r.originalUrl}</Card.Title> */ }
                     <Card.Text>
                       <a href={`${window.location.origin}/${r.shortId}`} target="_blank" rel="noopener noreferrer">{`${window.location.origin}/${r.shortId}`}</a>
                     </Card.Text>
@@ -95,9 +95,7 @@ function LilUrlForm() {
         <h2 className='bungee-regular'>Shorten URL</h2>
       <Card>
       <Card.Body>
-        <Card.Text>
-          <p>Paste long link</p>
-        </Card.Text>
+        <Card.Text>Paste long link</Card.Text>
         <Form onSubmit={handleSubmit}>
          
 
