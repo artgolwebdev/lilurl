@@ -45,13 +45,28 @@ export const createShortUrl = async (req, res) => {
     if (attempts === 5) {
         return res.status(500).json({ error: 'Failed to generate unique short ID' });
     }
+    let expiresInDays;
+    let userType = 'guest';// TO DO 
+    switch (userType) {
+      case 'registered':
+        expiresInDays = 270; // ~9 months
+        break;
+      case 'paid':
+        expiresInDays = 36500; // ~100 years (simulate never expiring)
+        break;
+      case 'guest':
+      default:
+        expiresInDays = 7;
+    }
 
-    const newUrl = new Url({ shortId, originalUrl });
+    const expiresAt = new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000);
+
+    const newUrl = new Url({ shortId, originalUrl , expiresAt });
 
     try {
         await newUrl.save();
         const cont = req.app.locals.cont;
-        return res.status(200).json({ shortId, originalUrl , shortUrl: `${cont.BASE_URL}/${shortId}` });
+        return res.status(200).json({ shortId, originalUrl , shortUrl: `${cont.BASE_URL}/${shortId}` , expiresAtTimestamp: expiresAt.getTime() });
     } catch (error) {
         console.error('Error saving to DB:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
