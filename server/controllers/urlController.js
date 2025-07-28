@@ -25,8 +25,10 @@ export const createShortUrl = async (req, res) => {
     if (!originalUrl || !/^https?:\/\//.test(originalUrl))
         return res.status(400).json({ error: 'Invalid URL' });  
 
-    // Generate a unique short ID and save the URL
-    // Ensure the shortId is unique
+    /* 
+    *  Generate a unique short ID and save the URL
+    *  Ensure the shortId is unique 
+    */
     
     let shortId;
     let attempts = 0;
@@ -100,17 +102,3 @@ export const getTotalUrls = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
-export const getUrlsForSession = async (req, res) => {
-    if (!req.session.id) {
-        return res.status(200).json([]);
-    }
-
-    try {
-        const urls = await Url.find({ sessionId: req.session.id }).sort({ createdAt: -1 });
-        res.status(200).json(urls);
-    } catch (error) {
-        console.error('Error fetching URLs for session:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-};

@@ -4,7 +4,6 @@ import { createShortUrl, redirectToOriginalUrl, getTotalUrls, getUrlsForSession 
 const router = express.Router();
 
 router.get('/total', getTotalUrls);
-router.get('/my-urls', getUrlsForSession);
 router.post('/shorten', createShortUrl);
 
 /**
