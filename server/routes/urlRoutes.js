@@ -1,5 +1,5 @@
 import express from 'express';
-import { createShortUrl, redirectToOriginalUrl, getTotalUrls, getUrlsForSession } from '../controllers/urlController.js';
+import { createShortUrl, redirectToOriginalUrl, getTotalUrls } from '../controllers/urlController.js';
 
 const router = express.Router();
 
