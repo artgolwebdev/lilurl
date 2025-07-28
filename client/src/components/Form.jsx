@@ -3,8 +3,8 @@ import Toast from 'react-bootstrap/Toast';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
+import lilurlService from '../services/lilurlService';
 
 function LilUrlForm() {
   const [input, setInput] = useState('');
@@ -30,43 +30,37 @@ function LilUrlForm() {
     setError('');
     setShortUrl('');
     setCopied(false);
-    const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
-    console.log("BASE_URL : " + BASE_URL);
     try {
-      const res = await fetch(`${BASE_URL}/shorten`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ originalUrl: input })
-      });
-      const data = await res.json();
-      if (res.ok && data.shortUrl) {
-        setShortUrl(data.shortUrl);
-        // Save to localStorage
-        const newResult = { originalUrl: input, shortUrl: data.shortUrl };
-        const updatedResults = [newResult, ...results];
-        setResults(updatedResults);
-        localStorage.setItem('lilurl_results', JSON.stringify(updatedResults));
-      } else {
-        setError(data.message || 'Failed to shorten URL');
-      }
+      const data = await lilurlService.shortenUrl(input);
+      setShortUrl(data.shortUrl);
+      // Save to localStorage
+      const newResult = { originalUrl: input, shortUrl: data.shortUrl };
+      const updatedResults = [newResult, ...results];
+      setResults(updatedResults);
+      localStorage.setItem('lilurl_results', JSON.stringify(updatedResults));
     } catch (err) {
-      setError('Server error. Try again later.');
+      setError(err.message || 'Failed to shorten URL');
     }
     setLoading(false);
   };
 
   return (
-    <div className="glass3d lilurl-card">
+    <div className="">
 
-           {/* Show results from localStorage */}
+      <Card className="">
+        <div className="card-header">
+          <h2 className='bungee-regular'>Shorten URL</h2>
+        </div>
+      <Card.Body>
+
+
+            {/* Show results from localStorage */}
         {results.length > 0 && (
           <div className="mt-4 mb-4">
-            <h3 className='bungee-regular'>Your Links</h3>
               {results.map((r, idx) => (
                 <Card key={idx} className='mb-2'>
                   <CardHeader>{r.originalUrl}</CardHeader>
                   <Card.Body>
-                    { /* <Card.Title style={{ fontSize: '1rem', wordBreak: 'break-all' }}>{r.originalUrl}</Card.Title> */ }
                     <Card.Text>
                       <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
                     </Card.Text>
@@ -87,9 +81,7 @@ function LilUrlForm() {
           </div>
         )}
 
-        <h2 className='bungee-regular'>Shorten URL</h2>
-      <Card>
-      <Card.Body>
+
         <Card.Text>Paste long link</Card.Text>
         <Form onSubmit={handleSubmit}>
          

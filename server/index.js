@@ -28,6 +28,7 @@ app.use(cors()); // add restrictions if needed
 app.use(xss()); // sanitize user input
 app.use(express.json());
 app.use('/', urlRoutes);
+console.log("here was");
 // React fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));

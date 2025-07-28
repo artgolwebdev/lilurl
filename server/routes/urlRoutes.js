@@ -1,11 +1,13 @@
 import express from 'express';
-import { createShortUrl, redirectToOriginalUrl, getTotalUrls } from '../controllers/urlController.js';
+import { createShortUrl, createQRCode , redirectToOriginalUrl, getTotalUrls } from '../controllers/urlController.js';
 
 const router = express.Router();
 
-router.get('/total',getTotalUrls)
-router.post('/shorten', createShortUrl);
+console.log("test");
 
+router.get('/api/totalLinks', getTotalUrls)
+router.post('/api/shorten', createShortUrl);
+router.post('/api/qr', createQRCode)
 /**
  *  Redirects to the original URL based on the short ID.
  */

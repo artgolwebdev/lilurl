@@ -39,7 +39,7 @@ The server will run on http://localhost:5000
 
 ### Create a Short URL
 
-POST /shorten
+POST /api/shorten
 
 ```
 {
@@ -54,7 +54,7 @@ GET /:shortId
 
 ###  Get Total Shortened URLs   
 
-GET  /total
+GET  /api/total/links
 
 ```
 {

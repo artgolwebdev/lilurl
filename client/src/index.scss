@@ -18,6 +18,10 @@
   font-style: normal;
 }
 
+.bluish-text{
+  color:#52def4;
+}
+
 .space-mono-bold-italic {
   font-family: "Space Mono", monospace;
   font-weight: 700;
@@ -83,10 +87,6 @@ h1, h2, h3,p {
   font-family: "Space Mono", monospace;
 }
 
-h2 , h3{
-  color:#ff00ea;
- text-shadow: 0 0 8px #00fff7, 0 0 2px #ff00ea inset;
-}
 
 button{
     font-family: "Audiowide", sans-serif!important;
@@ -102,6 +102,8 @@ footer{
     left: 0;
     width: 100%;
 }
+
+
 
 .glass3d { 
   --filter-glass3d: blur(32px) brightness(0.85) saturate(2.5); 

@@ -2,7 +2,17 @@
 import VantaBackground from './components/VantaBackground.jsx';
 import LilUrlNavBar from './components/LilUrlNavBar.jsx';
 import LilUrlForm from './components/Form.jsx';
+import LilUrlQRForm from './components/QRForm.jsx';
 import LilurlBabyLogo from './assets/lilurlbaby.png';
+import LilDashboard from './components/lilDashboard.jsx';
+
+// import Swiper JS
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+// import required modules
+import { EffectCards } from 'swiper/modules';
 
 function App() {
   return (
@@ -10,10 +20,54 @@ function App() {
       <VantaBackground />
       <LilUrlNavBar />
       <div className="container ">
-      <div className="row justify-content-center mt-4">
+      <div className="row mt-4">
+
         <div className="col-md-6">
-          <LilUrlForm />
+          <LilDashboard />
+        </div>
+
+        <div className="col-md-6">
+
+              <>
+                <Swiper
+                  effect={'cards'}
+                  grabCursor={true}
+                  modules={[EffectCards]}
+                  className="mySwiper"
+                  spaceBetween={50}
+                  onSlideChange={() => console.log('slide change')}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  initialSlide={1} // <-- Start on second slide (index 1)
+                >
+                  <SwiperSlide> 
+                    <LilUrlQRForm/>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <LilUrlForm />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Create Page</h2>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Create Business Card</h2>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>Slide 5</SwiperSlide>
+                  <SwiperSlide>Slide 6</SwiperSlide>
+                  <SwiperSlide>Slide 7</SwiperSlide>
+                  <SwiperSlide>Slide 8</SwiperSlide>
+                  <SwiperSlide>Slide 9</SwiperSlide>
+                </Swiper>
+              </>
         </div>  
+
       </div>
 
 

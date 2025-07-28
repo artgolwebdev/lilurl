@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import Url from '../models/Url.js';
-
+import fetchMeta from '../utils/fetchMeta.js';
+import QRCode from 'qrcode'; // Assuming you have a QR code generation library
 
 export const createShortUrl = async (req, res) => {
     const { originalUrl } = req.body;
@@ -61,16 +62,22 @@ export const createShortUrl = async (req, res) => {
 
     const expiresAt = new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000);
 
-    const newUrl = new Url({ shortId, originalUrl , expiresAt });
+    // Fetch meta tags
+    let meta = { metaTitle: '', metaDescription: '', metaImage: '' };
+    try {
+      meta = await fetchMeta(originalUrl);
+    } catch (e) {}
+
+    const newUrl = new Url({ shortId, originalUrl, expiresAt, ...meta });
 
     try {
         await newUrl.save();
         const cont = req.app.locals.cont;
-        return res.status(200).json({ shortId, originalUrl , shortUrl: `${cont.BASE_URL}/${shortId}` , expiresAtTimestamp: expiresAt.getTime() });
+        return res.status(200).json({ shortId, originalUrl, shortUrl: `${cont.BASE_URL}/${shortId}`, expiresAtTimestamp: expiresAt.getTime(), ...meta });
     } catch (error) {
         console.error('Error saving to DB:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
-    }      
+    }
 };
 
 export const redirectToOriginalUrl = async (req, res) => {
@@ -90,6 +97,7 @@ export const redirectToOriginalUrl = async (req, res) => {
 };
 
 export const getTotalUrls = async (req, res) => {
+    console.log("sdfsdfsdfsdf ..... ");
     try {
         const totalUrls = await Url.countDocuments();
         res.status(200).json({ totalUrls });
@@ -98,3 +106,19 @@ export const getTotalUrls = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }   
+
+export const createQRCode = async (req, res) => {
+     const { originalUrl } = req.body;
+
+    if (!originalUrl || typeof originalUrl !== 'string') {
+        return res.status(400).json({ error: 'Missing or invalid URL in request body' });
+    }
+
+    try {
+        const qrCodeDataURL = await QRCode.toDataURL(originalUrl);
+        res.json({ qrCode: qrCodeDataURL });
+    } catch (error) {
+        console.error('QR code generation failed:', error);
+        res.status(500).json({ error: 'Failed to generate QR code' });
+    }
+}
