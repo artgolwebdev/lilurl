@@ -61,7 +61,7 @@ export const createShortUrl = async (req, res) => {
 
     const expiresAt = new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000);
 
-    const newUrl = new Url({ shortId, originalUrl , expiresAt });
+    const newUrl = new Url({ shortId, originalUrl, expiresAt, sessionId: req.session.id });
 
     try {
         await newUrl.save();
@@ -97,4 +97,18 @@ export const getTotalUrls = async (req, res) => {
         console.error('Error fetching total URLs:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-}   
+}
+
+export const getUrlsForSession = async (req, res) => {
+    if (!req.session.id) {
+        return res.status(200).json([]);
+    }
+
+    try {
+        const urls = await Url.find({ sessionId: req.session.id }).sort({ createdAt: -1 });
+        res.status(200).json(urls);
+    } catch (error) {
+        console.error('Error fetching URLs for session:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};

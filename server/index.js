@@ -4,11 +4,13 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+dotenv.config();
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import reateLimit from 'express-rate-limit';
 import xss from 'xss-clean';
 import urlRoutes from './routes/urlRoutes.js';
 
-dotenv.config();
 const app = express();
 const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 const cont = { BASE_URL: BASE_URL }; // Your custom object
@@ -27,6 +29,21 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(cors()); // add restrictions if needed
 app.use(xss()); // sanitize user input
 app.use(express.json());
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'a_default_secret',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions'
+  }),
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  }
+}));
+
 app.use('/', urlRoutes);
 // React fallback
 app.get('*', (req, res) => {

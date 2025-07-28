@@ -16,12 +16,20 @@ function LilUrlForm() {
   const [toastMsg, setToastMsg] = useState('');
   const [showToast, setShowToast] = useState(false);
 
-  // Load from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('lilurl_results');
-    if (saved) {
-      setResults(JSON.parse(saved));
-    }
+    const fetchUrls = async () => {
+      const BASE_URL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : window.location.origin || 'https://lilurl.baby');
+      try {
+        const res = await fetch(`${BASE_URL}/my-urls`);
+        const data = await res.json();
+        if (res.ok) {
+          setResults(data);
+        }
+      } catch (err) {
+        console.error('Error fetching URLs:', err);
+      }
+    };
+    fetchUrls();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -41,11 +49,8 @@ function LilUrlForm() {
       const data = await res.json();
       if (res.ok && data.shortUrl) {
         setShortUrl(data.shortUrl);
-        // Save to localStorage
-        const newResult = { originalUrl: input, shortUrl: data.shortUrl };
-        const updatedResults = [newResult, ...results];
-        setResults(updatedResults);
-        localStorage.setItem('lilurl_results', JSON.stringify(updatedResults));
+        const newResult = { originalUrl: input, shortUrl: data.shortUrl, shortId: data.shortId };
+        setResults([newResult, ...results]);
       } else {
         setError(data.message || 'Failed to shorten URL');
       }
@@ -62,19 +67,19 @@ function LilUrlForm() {
         {results.length > 0 && (
           <div className="mt-4 mb-4">
             <h3 className='bungee-regular'>Your Links</h3>
-              {results.map((r, idx) => (
-                <Card key={idx} className='mb-2'>
+              {results.map((r) => (
+                <Card key={r.shortId} className='mb-2'>
                   <CardHeader>{r.originalUrl}</CardHeader>
                   <Card.Body>
                     { /* <Card.Title style={{ fontSize: '1rem', wordBreak: 'break-all' }}>{r.originalUrl}</Card.Title> */ }
                     <Card.Text>
-                      <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
+                      <a href={`${window.location.origin}/${r.shortId}`} target="_blank" rel="noopener noreferrer">{`${window.location.origin}/${r.shortId}`}</a>
                     </Card.Text>
                     <Button
                       variant="outline-secondary"
                       size="sm"
                       onClick={() => {
-                        navigator.clipboard.writeText(r.shortUrl);
+                        navigator.clipboard.writeText(`${window.location.origin}/${r.shortId}`);
                         setToastMsg('Short URL copied!');
                         setShowToast(true);
                       }}

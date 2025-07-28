@@ -4,7 +4,8 @@ const urlSchema = new mongoose.Schema({
     shortId : { type :String, required: true, unique: true },
     originalUrl : { type: String, required: true },
     createdAt: { type: Date, default: Date.now }, 
-    expiresAt: { type: Date, required: true }
+    expiresAt: { type: Date, required: true },
+    sessionId: { type: String, index: true }
 });
 urlSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 }); // TTL Index
 urlSchema.index({ shortId: 1 }, { unique: true }); // Ensure shortId is unique
