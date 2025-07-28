@@ -37,33 +37,195 @@ function App() {
                   spaceBetween={50}
                   onSlideChange={() => console.log('slide change')}
                   onSwiper={(swiper) => console.log(swiper)}
-                  initialSlide={1} // <-- Start on second slide (index 1)
+                  initialSlide={5} // <-- Start on second slide (index 1)
                 >
+
+
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Link Virus Scanner</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i> Input URL → scan with VirusTotal.</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>IP Quality Sqore</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>IP to country</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Link preview</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+                  
+
                   <SwiperSlide> 
                     <LilUrlQRForm/>
                   </SwiperSlide>
+
                   <SwiperSlide>
                     <LilUrlForm />
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                     <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Business Card</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
                   </SwiperSlide>
                   <SwiperSlide>
                     <div className="card">
                       <div className="card-header">
-                          <h2 className='bungee-regular'>Create Page</h2>
+                          <h2 className='bungee-regular'>Link-in-Bio Page Builder</h2>
                       </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
                     </div>
                   </SwiperSlide>
-                  <SwiperSlide>
-                     <div className="card">
+
+                   <SwiperSlide>
+                    <div className="card">
                       <div className="card-header">
-                          <h2 className='bungee-regular'>Create Business Card</h2>
+                          <h2 className='bungee-regular'>Link Password Protection</h2>
                       </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i>Input URL + password → only open with correct password.</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
                     </div>
                   </SwiperSlide>
-                  <SwiperSlide>Slide 5</SwiperSlide>
-                  <SwiperSlide>Slide 6</SwiperSlide>
-                  <SwiperSlide>Slide 7</SwiperSlide>
-                  <SwiperSlide>Slide 8</SwiperSlide>
-                  <SwiperSlide>Slide 9</SwiperSlide>
+
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Self-Destructing Link</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i>One-click link that deletes itself after N uses or minutes.</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Summarize a Link</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i>AI generates a short summary (use readability + GPT).</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                  
+                  <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Explain a Link </h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i>Paste a technical URL → get a human-friendly explanation.</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                  
+                  <SwiperSlide>  
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Auto-Tweet a Link  </h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i>Paste URL → AI writes an engaging tweet thread about it.</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
+                   <SwiperSlide>
+                    <div className="card">
+                      <div className="card-header">
+                          <h2 className='bungee-regular'>Generate Hashtags from Link</h2>
+                      </div>
+                      <div className="card-body">
+                        <p>Coming soon...</p>
+                        <i> Input URL → get suggested tags based on content.</i>
+                      </div>
+                      <div className="card-footer">
+                        <small className="text-muted">Stay tuned!</small>
+                    </div>
+                    </div>
+                  </SwiperSlide>
+
                 </Swiper>
               </>
         </div>  

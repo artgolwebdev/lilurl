@@ -34,7 +34,7 @@ function LilUrlQRForm() {
         
       <Card className="">
         <div className="card-header">
-            <h2 className='bungee-regular'>Generate QR Code</h2>
+            <h2 className='bungee-regular'>QR Code Generator</h2>
         </div>
       <Card.Body>
         <Card.Text>Paste link</Card.Text>
