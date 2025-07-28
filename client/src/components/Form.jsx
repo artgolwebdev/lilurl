@@ -90,9 +90,7 @@ function LilUrlForm() {
         <h2 className='bungee-regular'>Shorten URL</h2>
       <Card>
       <Card.Body>
-        <Card.Text>
-          <p>Paste long link</p>
-        </Card.Text>
+        <Card.Text>Paste long link</Card.Text>
         <Form onSubmit={handleSubmit}>
          
 
