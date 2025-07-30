@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import lilurlService from '../services/lilurlService';
+import Tilt from 'react-parallax-tilt';
 
 
 function LilDashboard() {
@@ -44,20 +45,14 @@ function LilDashboard() {
     <div className="">
       {error && <div className="alert alert-danger">{error}</div>}
       {total !== null ? (
-        <div className='d-flex justify-content-between align-items-center mb-4 '>
-            <div className="glass3d col-3 py-2 text-center mx-1 my-1 rounded">
-                <h3 className='audiowide-regular rounde text-primary'>Users</h3>
-                <p className='audiowide-regular fs-3 text-primary'></p>
-            </div>
-            <div className="glass3d col-3 py-2 text-center mx-1 my-1 rounded">
-                <h3 className='audiowide-regular text-primary'>Links</h3>
-                <p className='audiowide-regular fs-3 text-info  '>{displayed}</p>
-            </div>
-            <div className="glass3d col-3 py-2 text-center mx-1 my-1 rounded">
-                <h3 className='audiowide-regular text-primary'>QRs</h3>
+        <Tilt  tiltAngleXInitial={1} tiltAngleYInitial={-20}>
+        <div className='row mb-4'>
+            <div className="glass3d col-10 pt-2 mx-1 my-1 rounded">
+                <h3 className='audiowide-regular rounde text-primary'>TOTAL LINKS:  <span className='audiowide-regular fs-3 text-info  '>{displayed}</span></h3>
                 <p className='audiowide-regular fs-3 text-primary'></p>
             </div>
         </div>    
+        </Tilt>
       ) : (
         <span>Loading...</span>
       )}

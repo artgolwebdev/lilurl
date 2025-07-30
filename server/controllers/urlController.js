@@ -1,3 +1,4 @@
+
 import { nanoid } from 'nanoid';
 import Url from '../models/Url.js';
 import fetchMeta from '../utils/fetchMeta.js';
@@ -78,6 +79,25 @@ export const createShortUrl = async (req, res) => {
         console.error('Error saving to DB:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
+};
+
+
+// Delete a shortened URL by shortId
+export const deleteShortUrl = async (req, res) => {
+  const { shortId } = req.params;
+  if (!shortId) {
+    return res.status(400).json({ error: 'shortId is required' });
+  }
+  try {
+    const deleted = await Url.findOneAndDelete({ shortId });
+    if (!deleted) {
+      return res.status(404).json({ error: 'URL not found' });
+    }
+    return res.status(200).json({ message: 'Short URL deleted', shortId });
+  } catch (error) {
+    console.error('Error deleting short URL:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 export const redirectToOriginalUrl = async (req, res) => {

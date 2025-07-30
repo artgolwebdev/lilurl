@@ -32,9 +32,19 @@ function LilUrlForm() {
     setCopied(false);
     try {
       const data = await lilurlService.shortenUrl(input);
+      
       setShortUrl(data.shortUrl);
+      
       // Save to localStorage
-      const newResult = { originalUrl: input, shortUrl: data.shortUrl };
+      const newResult = { 
+          originalUrl: input, 
+          shortUrl: data.shortUrl , 
+          metaImage : data.metaImage ,
+          metaTitle : data.metaTitle , 
+          metaDescription : data.metaDescription , 
+          expiresAt: data.expiresAtTimestamp , 
+      };
+
       const updatedResults = [newResult, ...results];
       setResults(updatedResults);
       localStorage.setItem('lilurl_results', JSON.stringify(updatedResults));
@@ -59,11 +69,46 @@ function LilUrlForm() {
           <div className="mt-4 mb-4">
               {results.map((r, idx) => (
                 <Card key={idx} className='mb-2'>
-                  <CardHeader>{r.originalUrl}</CardHeader>
+                  <CardHeader className="d-flex justify-content-between align-items-center">
+                    <p>{r.originalUrl}</p>      
+                    <Button
+                      variant="link"
+                      size="sm"
+                      style={{ color: '#dc3545', fontWeight: 'bold', fontSize: '1.2rem', textDecoration: 'none', padding: 0, marginLeft: 8 }}
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        if (window.confirm('Are you sure you want to delete this short URL?')) {
+                          try {
+                            await lilurlService.deleteShortUrl(r.shortUrl.split('/').pop());
+                            const updated = results.filter((item, i) => i !== idx);
+                            setResults(updated);
+                            localStorage.setItem('lilurl_results', JSON.stringify(updated));
+                            setToastMsg('Short URL deleted');
+                            setShowToast(true);
+                          } catch (err) {
+                            setToastMsg('Failed to delete URL');
+                            setShowToast(true);
+                          }
+                        }
+                      }}
+                      aria-label="Delete"
+                    >
+                      ×
+                    </Button>
+                  </CardHeader>
                   <Card.Body>
-                    <Card.Text>
-                      <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
-                    </Card.Text>
+                   
+                    <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
+                    <br></br>
+                    {r.metaTitle && <p>{r.metaTitle}</p>}
+                    {r.metaDescription && <p>{r.metaDescription}</p>}
+                   
+                    {r.metaImage && <div><img src={r.metaImage} alt="meta preview" style={{maxWidth:'100px', maxHeight:'60px'}} /></div>}
+                  
+                  </Card.Body>
+                  <Card.Footer>
+                     {r.expiresAt && <div><small className="text-muted">Expires: {new Date(r.expiresAt).toLocaleString()}</small></div>}
+                     
                     <Button
                       variant="outline-secondary"
                       size="sm"
@@ -75,7 +120,7 @@ function LilUrlForm() {
                     >
                       Copy
                     </Button>
-                  </Card.Body>
+                  </Card.Footer>
                 </Card>
               ))}
           </div>
@@ -109,7 +154,7 @@ function LilUrlForm() {
    
         {/* Toast notification for copy */}
         <div style={{ position: 'fixed', top: 20, right: 20, zIndex: 9999 }}>
-          <Toast onClose={() => setShowToast(false)} show={showToast} delay={1200} autohide bg="success">
+          <Toast onClose={() => setShowToast(false)} show={showToast} delay={1500} autohide bg={toastMsg === 'Short URL deleted' ? 'warning' : 'success'}>
             <Toast.Body style={{ color: '#fff', fontWeight: 'bold' }}>{toastMsg}</Toast.Body>
           </Toast>
         </div>

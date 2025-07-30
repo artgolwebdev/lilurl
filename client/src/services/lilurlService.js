@@ -1,9 +1,6 @@
 // lilurlService.js
 // Centralized service for API calls to the lilurl backend
-
-//const API_BASE = 'http://localhost:5000/api';
 const API_BASE = window.location.origin.includes('localhost') ? 'http://localhost:5000/api' : window.location.origin+'/api' ;
-console.log("API_BASE : "+ API_BASE);
 const lilurlService = {
   async shortenUrl(originalUrl) {
     const res = await fetch(`${API_BASE}/shorten`, {
@@ -16,7 +13,15 @@ const lilurlService = {
     return data;
   },
 
-async generateQRcode(originalUrl) {
+  async deleteShortUrl(shortId) {
+    const res = await fetch(`${API_BASE}/shorten/${shortId}`, {
+      method: 'DELETE',
+    });
+    if (!res.ok) throw new Error('Failed to delete URL');
+    return await res.json();
+  },
+
+  async generateQRcode(originalUrl) {
     const res = await fetch(`${API_BASE}/qr`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -31,8 +36,8 @@ async generateQRcode(originalUrl) {
     const res = await fetch(`${API_BASE}/totalLinks`);
     console.log(`${API_BASE}/totalLinks`);
     console.log(res);
-    if (!res.ok) throw new Error('Failed to fetch total URLs');
     const data = await res.json();
+    if (!res.ok) throw new Error('Failed to fetch total URLs');
     return data;
   }
 };
