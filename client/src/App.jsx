@@ -35,8 +35,14 @@ function App() {
                   modules={[EffectCards]}
                   className="mySwiper"
                   spaceBetween={50}
-                  onSlideChange={() => console.log('slide change')}
-                  onSwiper={(swiper) => console.log(swiper)}
+                  onSlideChange={() => {
+                    //console.log('slide change')}
+                    }
+                  }
+                  onSwiper={(swiper) => {
+                      //console.log(swiper)
+                    }
+                  }
                   initialSlide={2} // <-- Start on second slide (index 1)
                 >
 

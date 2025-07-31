@@ -54,72 +54,64 @@ function LilUrlForm() {
     setLoading(false);
   };
 
+  const deleteShortUrl = async (e, idx) => {
+    e.stopPropagation();
+    const r = results[idx];
+    if (window.confirm('Are you sure you want to delete this short URL?')) {
+      try {
+        await lilurlService.deleteShortUrl(r.shortUrl.split('/').pop());
+        const updated = results.filter((item, i) => i !== idx);
+        setResults(updated);
+        localStorage.setItem('lilurl_results', JSON.stringify(updated));
+        setToastMsg('Short URL deleted');
+        setShowToast(true);
+      } catch (err) {
+        setToastMsg('Failed to delete URL');
+        setShowToast(true);
+      }
+    }
+  };
+
   return (
-    <div className="">
+    <div className=" d-">
 
-      <Card className="">
-        <div className="card-header">
-          <h2 className='bungee-regular'>Shorten URL</h2>
-        </div>
-      <Card.Body>
-
-
+      
             {/* Show results from localStorage */}
         {results.length > 0 && (
           <div className="mt-4 mb-4">
               {results.map((r, idx) => (
                 <Card key={idx} className='mb-2'>
                   <CardHeader className="d-flex justify-content-between align-items-center">
-                    <p>{r.originalUrl}</p>      
-                    <Button
-                      variant="link"
-                      size="sm"
-                      style={{ color: '#dc3545', fontWeight: 'bold', fontSize: '1.2rem', textDecoration: 'none', padding: 0, marginLeft: 8 }}
-                      onClick={async (e) => {
-                        e.stopPropagation();
-                        if (window.confirm('Are you sure you want to delete this short URL?')) {
-                          try {
-                            await lilurlService.deleteShortUrl(r.shortUrl.split('/').pop());
-                            const updated = results.filter((item, i) => i !== idx);
-                            setResults(updated);
-                            localStorage.setItem('lilurl_results', JSON.stringify(updated));
-                            setToastMsg('Short URL deleted');
-                            setShowToast(true);
-                          } catch (err) {
-                            setToastMsg('Failed to delete URL');
-                            setShowToast(true);
-                          }
-                        }
-                      }}
-                      aria-label="Delete"
-                    >
-                      ×
-                    </Button>
+                    <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>  
+
+                    {r.metaImage && <div><img src={r.metaImage} alt="meta preview" style={{maxWidth:'100px', maxHeight:'60px'}} /></div>}
+
+
                   </CardHeader>
                   <Card.Body>
-                   
-                    <a href={r.shortUrl} target="_blank" rel="noopener noreferrer">{r.shortUrl}</a>
-                    <br></br>
-                    {r.metaTitle && <p>{r.metaTitle}</p>}
-                    {r.metaDescription && <p>{r.metaDescription}</p>}
-                   
-                    {r.metaImage && <div><img src={r.metaImage} alt="meta preview" style={{maxWidth:'100px', maxHeight:'60px'}} /></div>}
-                  
+                    <p>{r.originalUrl}</p>    
+                    {r.metaTitle && <p className='fs-6'>{r.metaTitle}</p>}                  
                   </Card.Body>
                   <Card.Footer>
-                     {r.expiresAt && <div><small className="text-muted">Expires: {new Date(r.expiresAt).toLocaleString()}</small></div>}
-                     
-                    <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={() => {
-                        navigator.clipboard.writeText(r.shortUrl);
-                        setToastMsg('Short URL copied!');
-                        setShowToast(true);
-                      }}
-                    >
-                      Copy
-                    </Button>
+
+                    <div className="d-flex justify-content-between align-items-center">
+                      {r.expiresAt && <div><small className="text-muted">Expires: {new Date(r.expiresAt).toLocaleString()}</small></div>}
+
+                        <div className="btn-group" role="group">
+                          <Button type="button" variant="outline-success text-warning" size="sm" onClick={e => deleteShortUrl(e, idx)}>Delete</Button>
+                          <Button type="button" variant="outline-success text-primary" size="sm" disabled="1">Share</Button>
+                          <Button
+                            variant="outline-success"
+                              size="xs"
+                                onClick={() => {
+                                  navigator.clipboard.writeText(r.shortUrl);
+                                  setToastMsg('Short URL copied!');
+                                  setShowToast(true);
+                                }}
+                              >Copy</Button>
+
+                        </div>
+                    </div>                   
                   </Card.Footer>
                 </Card>
               ))}
@@ -127,6 +119,11 @@ function LilUrlForm() {
         )}
 
 
+      <Card className="">
+        <div className="card-header">
+          <h2 className='bungee-regular'>Shorten URL</h2>
+        </div>
+      <Card.Body>
         <Card.Text>Paste long link</Card.Text>
         <Form onSubmit={handleSubmit}>
          

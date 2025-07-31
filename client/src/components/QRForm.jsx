@@ -16,7 +16,6 @@ function LilUrlQRForm() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    console.log(input);
     try {
       const data = await lilurlService.generateQRcode(input);
         console.log(data);

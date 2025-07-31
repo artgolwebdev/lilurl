@@ -24,7 +24,7 @@ const lilurlService = {
   async generateQRcode(originalUrl) {
     const res = await fetch(`${API_BASE}/qr`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },  
       body: JSON.stringify({ originalUrl })
     });
     const data = await res.json();
@@ -33,9 +33,8 @@ const lilurlService = {
   },
 
   async getTotalUrls() {    
+    console.log('Fetching total URLs from:', `${API_BASE}/totalLinks`);
     const res = await fetch(`${API_BASE}/totalLinks`);
-    console.log(`${API_BASE}/totalLinks`);
-    console.log(res);
     const data = await res.json();
     if (!res.ok) throw new Error('Failed to fetch total URLs');
     return data;
