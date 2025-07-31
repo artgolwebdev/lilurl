@@ -8,12 +8,33 @@ function LilUrlNavBar() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
+    // Placeholder: page/component mounted
+    console.log('LilUrlNavBar mounted');
     document.body.setAttribute('data-bs-theme', theme);
     localStorage.setItem('theme', theme);
+    console.log('Theme set to:', theme);
+    if (theme === 'light') {
+      // Remove 'glass3d' class from all elements with that class
+      setTimeout( () => {
+        document.querySelectorAll('.card.glass3d').forEach(el => el.classList.remove('glass3d'));
+      });
+    }
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    if (newTheme === 'light') {
+      // Remove 'glass3d' class from all elements with that class
+      document.querySelectorAll('.card.glass3d').forEach(el => el.classList.remove('glass3d'));
+    } else {
+      // Add 'glass3d' class to all cards
+      document.querySelectorAll('.card').forEach(el => {
+        if (!el.classList.contains('glass3d')) {
+          el.classList.add('glass3d');
+        }
+      });
+    }
   };
 
   return (

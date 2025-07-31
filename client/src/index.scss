@@ -3,8 +3,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee&family=Neonderthaw&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /*
-* 
+*  LIL URL SHORTEN CARD
 */
+
+.lilurl-shorten-card{
+  border:1px solid red;
+  position: relative;
+
+  .card-header{
+    height:40px;
+  }
+
+  .link-holder{
+    position: relative;
+  }
+
+  .img-holder{
+    position: relative;
+    right: 10px;
+    cursor: default;
+  }
+  @media screen and (max-width: 768px) {
+      a{
+        font-size: 12px;
+      }
+    }
+}
 
 body{
  overflow-x: hidden;
