@@ -60,7 +60,7 @@ function LilUrlForm() {
     const r = results[idx];
     if (window.confirm('Are you sure you want to delete this short URL?')) {
       try {
-        //await lilurlService.deleteShortUrl(r.shortUrl.split('/').pop());
+        await lilurlService.deleteShortUrl(r.shortUrl.split('/').pop());
         const updated = results.filter((item, i) => i !== idx);
         setResults(updated);
         localStorage.setItem('lilurl_results', JSON.stringify(updated));
@@ -74,10 +74,10 @@ function LilUrlForm() {
   };
 
   return (
-    <div className=" d-">
+    <div className="">
 
       
-            {/* Show results from localStorage */}
+        {/* Show results from localStorage */}
         {results.length > 0 && (
           <div className="mt-4 mb-4">
               {results.map((r, idx) => (
@@ -86,28 +86,26 @@ function LilUrlForm() {
                     <a href={r.shortUrl} target="_blank" className='link-holder audiowide-regular text-seccess' rel="noopener noreferrer">{r.shortUrl}</a>  
 
                     {r.metaImage && 
-                    <Tilt  tiltAngleXInitial={1} tiltAngleYInitial={20}>
                       <div className='img-holder'>
                         <img src={r.metaImage} alt="meta preview" 
                           style={{maxWidth:'100px', maxHeight:'60px'}} />
                       </div>
-                    </Tilt>
+                    
                     }
 
 
                   </CardHeader>
+
+
                   <Card.Body>
                     {r.metaTitle && <p className='fs-6'>{r.metaTitle}</p>}                  
                     <p>{r.originalUrl}</p>    
-                  </Card.Body>
-                  <Card.Footer>
 
-                    <div className="d-flex justify-content-between align-items-center">
-                      {r.expiresAt && <div><small className="text-muted">Expires: {new Date(r.expiresAt).toLocaleString()}</small></div>}
-
+                    
                         <div className="btn-group" role="group">
                           <Button type="button" variant="outline-info" size="sm" onClick={e => deleteShortUrl(e, idx)}>Delete</Button>
                           <Button type="button" variant="outline-info" size="sm" disabled="1">Share</Button>
+                          <Button type="button" variant="outline-info" size="sm" disabled="1">QR Code</Button>
                           <Button
                             variant="outline-info"
                               size="xs"
@@ -119,6 +117,15 @@ function LilUrlForm() {
                               >Copy</Button>
 
                         </div>
+
+                  </Card.Body>
+
+
+                  <Card.Footer>
+
+                    <div className="">
+                      {r.expiresAt && <div><small className="text-muted">Expires: {new Date(r.expiresAt).toLocaleString()}</small></div>}
+
                     </div>                   
                   </Card.Footer>
                 </Card>
@@ -126,45 +133,46 @@ function LilUrlForm() {
           </div>
         )}
 
+      {/* Show form if no results from localStorage */}
+        {results.length < 1 && ( 
+          <Card className="glass3d">
+            <div className="card-header">
+              <h2 className='bungee-regular'>Shorten URL</h2>
+            </div>
+            <Card.Body>
+              <Card.Text>Paste long link</Card.Text>
+              <Form onSubmit={handleSubmit}>
+              
 
-      <Card className="glass3d">
-        <div className="card-header">
-          <h2 className='bungee-regular'>Shorten URL</h2>
-        </div>
-      <Card.Body>
-        <Card.Text>Paste long link</Card.Text>
-        <Form onSubmit={handleSubmit}>
-         
+              <div className="mb-3">
+                    <input   type="text"
+                    placeholder="https://example.com/your-long-url"
+                    className="form-control"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    disabled={loading}
+                    autoComplete='off'
+                    required/>
+              </div>
 
-        <div className="mb-3">
-               <input   type="text"
-              placeholder="https://example.com/your-long-url"
-              className="form-control"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              disabled={loading}
-              autoComplete='off'
-              required/>
-        </div>
+            
+                <div className="d-grid gap-2 mb-2">
+                  <Button className='audiowide-regular' variant="primary" size="lg" type="submit" disabled={loading}>
+                    {loading ? 'Loading...' : 'get link for free'}
+                  </Button>
+                </div>
+              </Form>
+              {error && <div className="alert alert-danger mt-2">{error}</div>}
 
-      
-          <div className="d-grid gap-2 mb-2">
-            <Button className='audiowide-regular' variant="primary" size="lg" type="submit" disabled={loading}>
-              {loading ? 'Loading...' : 'get link for free'}
-            </Button>
-          </div>
-        </Form>
-        {error && <div className="alert alert-danger mt-2">{error}</div>}
-
-   
+            </Card.Body>
+          </Card>
+        )}
         {/* Toast notification for copy */}
-        <div style={{ position: 'fixed', top: 20, right: 20, zIndex: 9999 }}>
-          <Toast onClose={() => setShowToast(false)} show={showToast} delay={1500} autohide bg={toastMsg === 'Short URL deleted' ? 'warning' : 'success'}>
-            <Toast.Body style={{ color: '#fff', fontWeight: 'bold' }}>{toastMsg}</Toast.Body>
-          </Toast>
-        </div>
-      </Card.Body>
-      </Card>
+          <div style={{ position: 'absolute', top: 20, right: 20, zIndex: 9999 }}>
+            <Toast onClose={() => setShowToast(false)} show={showToast} delay={1500} autohide bg={toastMsg === 'Short URL deleted' ? 'warning' : 'success'}>
+              <Toast.Body style={{ color: '#fff', fontWeight: 'bold' }}>{toastMsg}</Toast.Body>
+            </Toast>
+          </div>
     </div>
   );
 }

@@ -51,7 +51,7 @@ function App() {
                   <SwiperSlide>
                     <div className="card">
                       <div className="card-header">
-                          <h2 className='bungee-regular'>Link preview</h2>
+                          <h2 className='bungee-regular'>API</h2>
                       </div>
                       <div className="card-body">
                         <p>Coming soon...</p>
@@ -71,19 +71,7 @@ function App() {
                     <LilUrlForm />
                   </SwiperSlide>
 
-                  <SwiperSlide>
-                     <div className="card">
-                      <div className="card-header">
-                          <h2 className='bungee-regular'>Business Card</h2>
-                      </div>
-                      <div className="card-body">
-                        <p>Coming soon...</p>
-                      </div>
-                      <div className="card-footer">
-                        <small className="text-muted">Stay tuned!</small>
-                    </div>
-                    </div>
-                  </SwiperSlide>
+                
                 </Swiper>
               </>
         </div>  
